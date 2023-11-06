@@ -1,17 +1,35 @@
 function isPalindrome(x: number): boolean {
-  const chars = x.toString();
+  const digits = getDigits(x);
 
   let left = 0;
-  let right = chars.length - 1;
+  let right = digits.length - 1;
 
   while (right >= left) {
-    if (chars[left] !== chars[right]) return false;
+    if (digits[left] !== digits[right]) return false;
 
     left += 1;
     right -= 1;
   }
 
   return true;
+}
+
+function getDigits(value: number): Array<string | number> {
+  const digits = [];
+
+  let remaining = Math.abs(value);
+
+  while (remaining) {
+    digits.push(remaining % 10);
+
+    remaining = Math.floor(remaining / 10);
+  }
+
+  if (value < 0) {
+    digits.push("-");
+  }
+
+  return digits;
 }
 
 (() => {
